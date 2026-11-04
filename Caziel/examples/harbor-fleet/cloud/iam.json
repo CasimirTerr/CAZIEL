@@ -1,0 +1,257 @@
+{
+  "principals": [
+    {
+      "name": "dispatch-agent-role",
+      "kind": "role",
+      "arn": "arn:aws:iam::111122223333:role/dispatch-agent-role",
+      "unique_id": "AROA4HRBRDISPATCH01",
+      "purpose": "Execution role for the dispatch agent on Bedrock AgentCore Runtime",
+      "exposure": "Assumed by AgentCore; temporary credentials only",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "InvokeModels",
+              "Effect": "Allow",
+              "Action": [
+                "bedrock:InvokeModel",
+                "bedrock:InvokeModelWithResponseStream"
+              ],
+              "Resource": "*"
+            },
+            {
+              "Sid": "CallTools",
+              "Effect": "Allow",
+              "Action": "lambda:InvokeFunction",
+              "Resource": "arn:aws:lambda:us-west-2:111122223333:function:fleet-*"
+            },
+            {
+              "Sid": "ReadTickets",
+              "Effect": "Allow",
+              "Action": [
+                "s3:GetObject"
+              ],
+              "Resource": "arn:aws:s3:::harbor-work-orders/*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "fleet-tools-role",
+      "kind": "role",
+      "arn": "arn:aws:iam::111122223333:role/fleet-tools-role",
+      "unique_id": "AROA4HRBRFLEETTOOLS",
+      "purpose": "Shared Lambda execution role for every dispatch-agent tool",
+      "exposure": "Lambda execution role",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "Connect",
+              "Effect": "Allow",
+              "Action": "iot:Connect",
+              "Resource": "arn:aws:iot:us-west-2:111122223333:client/fleet-tools-*"
+            },
+            {
+              "Sid": "PublishFleet",
+              "Effect": "Allow",
+              "Action": "iot:Publish",
+              "Resource": "arn:aws:iot:us-west-2:111122223333:topic/fleet/*"
+            },
+            {
+              "Sid": "Logs",
+              "Effect": "Allow",
+              "Action": [
+                "logs:CreateLogStream",
+                "logs:PutLogEvents"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ops-console-role",
+      "kind": "role",
+      "arn": "arn:aws:iam::111122223333:role/ops-console-role",
+      "unique_id": "AROA4HRBROPSCONSOLE",
+      "purpose": "Fleet operations web console (Cognito identity pool, ~40 operators)",
+      "exposure": "Cognito-federated sessions in operators' browsers",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "Navigate",
+              "Effect": "Allow",
+              "Action": "iot:Publish",
+              "Resource": [
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/*/cmd/navigate",
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/*/cmd/dock",
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/*/cmd/velocity"
+              ]
+            },
+            {
+              "Sid": "TalkToDispatch",
+              "Effect": "Allow",
+              "Action": "bedrock-agentcore:InvokeAgentRuntime",
+              "Resource": "arn:aws:bedrock-agentcore:us-west-2:111122223333:runtime/dispatch_agent-Qm7tR2xK9p"
+            },
+            {
+              "Sid": "HotfixTools",
+              "Effect": "Allow",
+              "Action": [
+                "lambda:UpdateFunctionCode",
+                "lambda:GetFunction"
+              ],
+              "Resource": "arn:aws:lambda:us-west-2:111122223333:function:fleet-*"
+            },
+            {
+              "Sid": "Telemetry",
+              "Effect": "Allow",
+              "Action": [
+                "iot:Subscribe",
+                "iot:Receive"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "release-pipeline-role",
+      "kind": "role",
+      "arn": "arn:aws:iam::111122223333:role/release-pipeline-role",
+      "unique_id": "AROA4HRBRRELEASEPL1",
+      "purpose": "GitHub Actions OIDC role that ships robot software",
+      "exposure": "GitHub OIDC; trust policy allows any branch of harbor/robot-stack",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "Deploy",
+              "Effect": "Allow",
+              "Action": [
+                "greengrass:CreateDeployment",
+                "greengrass:GetDeployment"
+              ],
+              "Resource": [
+                "arn:aws:iot:us-west-2:111122223333:thinggroup/kx1-fleet",
+                "arn:aws:greengrass:us-west-2:111122223333:components:*"
+              ]
+            },
+            {
+              "Sid": "Artifacts",
+              "Effect": "Allow",
+              "Action": [
+                "s3:PutObject"
+              ],
+              "Resource": "arn:aws:s3:::harbor-robot-artifacts/*"
+            }
+          ]
+        }
+      ],
+      "tags": {
+        "caziel:role": "release"
+      }
+    },
+    {
+      "name": "vendor-support",
+      "kind": "user",
+      "arn": "arn:aws:iam::111122223333:user/vendor-support",
+      "unique_id": "AIDA4HRBRVENDORSUP1",
+      "purpose": "Robot vendor's remote support login",
+      "exposure": "Long-lived access key created 2025-09-12, never rotated, shared across the vendor's support team",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "Support",
+              "Effect": "Allow",
+              "Action": "iot:*",
+              "Resource": "*"
+            },
+            {
+              "Sid": "Logs",
+              "Effect": "Allow",
+              "Action": [
+                "logs:FilterLogEvents",
+                "logs:GetLogEvents"
+              ],
+              "Resource": "*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "site-supervisor-role",
+      "kind": "role",
+      "arn": "arn:aws:iam::111122223333:role/site-supervisor-role",
+      "unique_id": "AROA4HRBRSUPERVISOR",
+      "purpose": "Tablet app for the Zone A supervisor",
+      "exposure": "Cognito-federated sessions on one tablet",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "ZoneANavigate",
+              "Effect": "Allow",
+              "Action": "iot:Publish",
+              "Resource": [
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/kx1-01/cmd/navigate",
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/kx1-02/cmd/navigate",
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/kx1-03/cmd/navigate",
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/kx1-04/cmd/navigate"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "telemetry-analytics-role",
+      "kind": "role",
+      "arn": "arn:aws:iam::111122223333:role/telemetry-analytics-role",
+      "unique_id": "AROA4HRBRTELEMETRY1",
+      "purpose": "Nightly analytics job",
+      "exposure": "Glue job role",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Sid": "Read",
+              "Effect": "Allow",
+              "Action": [
+                "iot:Subscribe",
+                "iot:Receive"
+              ],
+              "Resource": [
+                "arn:aws:iot:us-west-2:111122223333:topic/fleet/*/telemetry/*",
+                "arn:aws:iot:us-west-2:111122223333:topicfilter/fleet/*/telemetry/*"
+              ]
+            },
+            {
+              "Sid": "Lake",
+              "Effect": "Allow",
+              "Action": [
+                "s3:GetObject",
+                "s3:PutObject"
+              ],
+              "Resource": "arn:aws:s3:::harbor-telemetry-lake/*"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+# Hardened by caziel fix. See caziel-fix/CHANGES.md.
+agents:
+- name: dispatch-agent
+  runtime: bedrock-agentcore
+  arn: arn:aws:bedrock-agentcore:us-west-2:111122223333:runtime/dispatch_agent-Qm7tR2xK9p
+  role: dispatch-agent-role
+  human_approval: false
+  untrusted_inputs: [Work-order tickets from the customer portal, Dock camera snapshots
+      (the model reads text in the scene)]
+  tools:
+  - {name: navigate_to, description: Send a robot to a named location., function: 'arn:aws:lambda:us-west-2:111122223333:function:fleet-navigate',
+    role: fleet-tools-role, publishes: 'fleet/{thing}/cmd/navigate'}
+  - {name: nudge, description: Move a stuck robot a short distance., function: 'arn:aws:lambda:us-west-2:111122223333:function:fleet-nudge',
+    role: fleet-tools-role, publishes: 'fleet/{thing}/cmd/velocity'}
+  - {name: pick_item, description: Plan and run a pick with MoveIt., function: 'arn:aws:lambda:us-west-2:111122223333:function:fleet-pick',
+    role: fleet-tools-role, publishes: 'fleet/{thing}/cmd/pick'}
+- name: inventory-agent
+  runtime: bedrock-agent
+  arn: arn:aws:bedrock:us-west-2:111122223333:agent/INVQ4K2M1A
+  role: dispatch-agent-role
+  human_approval: false
+  untrusted_inputs: [Supplier advance-shipping notices (email)]
+  tools:
+  - {name: lookup_stock, description: Ask a robot to report what is in its tote.,
+    function: 'arn:aws:lambda:us-west-2:111122223333:function:inventory-lookup', role: telemetry-analytics-role,
+    publishes: 'fleet/{thing}/telemetry/request'}

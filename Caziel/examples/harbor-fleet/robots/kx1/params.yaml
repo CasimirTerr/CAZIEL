@@ -1,0 +1,85 @@
+# Runtime parameters captured from kx1-04 (ros2 param dump, merged per node).
+# Trimmed to the nodes that matter for motion and safety.
+
+diff_drive_controller:
+  ros__parameters:
+    left_wheel_names: ["left_wheel_joint"]
+    right_wheel_names: ["right_wheel_joint"]
+    wheel_separation: 0.62
+    wheel_radius: 0.09
+    publish_rate: 50.0
+    base_frame_id: base_footprint
+    linear:
+      x:
+        has_velocity_limits: true
+        max_velocity: 2.0      # vendor default, left as shipped
+        has_acceleration_limits: true
+        max_acceleration: 1.5
+    angular:
+      z:
+        has_velocity_limits: true
+        max_velocity: 2.5
+
+controller_server:
+  ros__parameters:
+    controller_frequency: 20.0
+    controller_plugins: ["FollowPath"]
+    FollowPath:
+      plugin: "nav2_regulated_pure_pursuit_controller::RegulatedPurePursuitController"
+      desired_linear_vel: 0.5
+      max_vel_x: 0.5
+      lookahead_dist: 0.6
+      use_regulated_linear_velocity_scaling: true
+
+velocity_smoother:
+  ros__parameters:
+    smoothing_frequency: 20.0
+    scale_velocities: false
+    feedback: "OPEN_LOOP"
+    max_velocity: [0.5, 0.0, 1.0]
+    min_velocity: [-0.3, 0.0, -1.0]
+    max_accel: [1.0, 0.0, 2.0]
+    max_decel: [-1.5, 0.0, -2.5]
+
+collision_monitor:
+  ros__parameters:
+    base_frame_id: base_footprint
+    odom_frame_id: odom
+    cmd_vel_in_topic: cmd_vel_smoothed
+    cmd_vel_out_topic: cmd_vel
+    state_topic: collision_monitor_state
+    transform_tolerance: 0.2
+    source_timeout: 1.0
+    stop_pub_timeout: 2.0
+    polygons: ["PolygonStop", "PolygonSlow"]
+    PolygonStop:
+      type: polygon
+      points: "[[0.55, 0.35], [0.55, -0.35], [-0.45, -0.35], [-0.45, 0.35]]"
+      action_type: stop
+      min_points: 4
+      enabled: true
+    PolygonSlow:
+      type: polygon
+      points: "[[1.2, 0.5], [1.2, -0.5], [-0.6, -0.5], [-0.6, 0.5]]"
+      action_type: slowdown
+      slowdown_ratio: 0.3
+      min_points: 4
+      enabled: true
+    observation_sources: ["scan"]
+    scan:
+      type: scan
+      topic: scan
+
+move_group:
+  ros__parameters:
+    default_velocity_scaling_factor: 0.1
+    default_acceleration_scaling_factor: 0.1
+    planning_scene_monitor_options:
+      publish_planning_scene: true
+
+arm_controller:
+  ros__parameters:
+    joints: [shoulder_pan_joint, shoulder_lift_joint, elbow_joint, wrist_joint]
+    command_interfaces: [position]
+    state_interfaces: [position, velocity]
+    allow_partial_joints_goal: false

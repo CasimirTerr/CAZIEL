@@ -1,0 +1,3097 @@
+{
+  "tool": "caziel",
+  "version": "1.0.0",
+  "fleet": {
+    "name": "Harbor Logistics - Tempe DC",
+    "account": "111122223333",
+    "region": "us-west-2",
+    "robots": 12,
+    "people_present": true,
+    "body_regions": [
+      {
+        "key": "hand",
+        "label": "Hand and fingers",
+        "force_n": 280.0,
+        "k_n_per_m": 75000.0,
+        "mass_kg": 0.6,
+        "energy_limit_j": 0.523
+      },
+      {
+        "key": "forearm",
+        "label": "Lower arm and wrist",
+        "force_n": 320.0,
+        "k_n_per_m": 40000.0,
+        "mass_kg": 2.0,
+        "energy_limit_j": 1.28
+      },
+      {
+        "key": "upper_arm",
+        "label": "Upper arm and elbow",
+        "force_n": 300.0,
+        "k_n_per_m": 30000.0,
+        "mass_kg": 3.0,
+        "energy_limit_j": 1.5
+      },
+      {
+        "key": "chest",
+        "label": "Chest",
+        "force_n": 280.0,
+        "k_n_per_m": 25000.0,
+        "mass_kg": 40.0,
+        "energy_limit_j": 1.568
+      },
+      {
+        "key": "abdomen",
+        "label": "Abdomen",
+        "force_n": 220.0,
+        "k_n_per_m": 10000.0,
+        "mass_kg": 40.0,
+        "energy_limit_j": 2.42
+      },
+      {
+        "key": "thigh",
+        "label": "Thigh and knee",
+        "force_n": 440.0,
+        "k_n_per_m": 50000.0,
+        "mass_kg": 75.0,
+        "energy_limit_j": 1.936
+      }
+    ],
+    "models": [
+      {
+        "model": "KX-1 mobile manipulator",
+        "urdf_mass_kg": 112.28,
+        "payload_kg": 4.0,
+        "base_hardware_speed_mps": 2.0,
+        "safety_nodes": [
+          "/collision_monitor"
+        ],
+        "ros_security": false,
+        "arm": {
+          "joints": [
+            "shoulder_pan_joint",
+            "shoulder_lift_joint",
+            "elbow_joint",
+            "wrist_joint"
+          ],
+          "reach_m": 1.0,
+          "moving_mass_kg": 10.7,
+          "tip_speed_bound_mps": 4.79,
+          "moveit_scaling": 0.1,
+          "per_joint": [
+            {
+              "joint": "shoulder_pan_joint",
+              "type": "revolute",
+              "limit": 1.6,
+              "lever_m": 1.0,
+              "tip_mps": 1.6
+            },
+            {
+              "joint": "shoulder_lift_joint",
+              "type": "revolute",
+              "limit": 1.6,
+              "lever_m": 0.9,
+              "tip_mps": 1.44
+            },
+            {
+              "joint": "elbow_joint",
+              "type": "revolute",
+              "limit": 2.0,
+              "lever_m": 0.55,
+              "tip_mps": 1.1
+            },
+            {
+              "joint": "wrist_joint",
+              "type": "revolute",
+              "limit": 2.6,
+              "lever_m": 0.25,
+              "tip_mps": 0.65
+            }
+          ]
+        },
+        "things": [
+          "kx1-01",
+          "kx1-02",
+          "kx1-03",
+          "kx1-04",
+          "kx1-05",
+          "kx1-06",
+          "kx1-07",
+          "kx1-08",
+          "kx1-09",
+          "kx1-10",
+          "kx1-11",
+          "kx1-12"
+        ],
+        "bridge": "kx1-edge-bridge",
+        "base_mass_kg": 116.28,
+        "safe_speed_mps": {
+          "base": {
+            "hand": 1.323,
+            "forearm": 1.141,
+            "upper_arm": 1.013,
+            "chest": 0.325,
+            "abdomen": 0.403,
+            "thigh": 0.291
+          },
+          "arm": {
+            "hand": 1.362,
+            "forearm": 1.247,
+            "upper_arm": 1.149,
+            "chest": 0.643,
+            "abdomen": 0.799,
+            "thigh": 0.682
+          },
+          "arm_effective_mass_kg": {
+            "value": 9.35
+          }
+        }
+      }
+    ]
+  },
+  "summary": {
+    "counts": {
+      "critical": 12,
+      "high": 10,
+      "medium": 5,
+      "low": 0,
+      "info": 0
+    },
+    "accepted": 0,
+    "actors": 9,
+    "actors_that_move_robots": 6,
+    "actors_with_contact": 5,
+    "worst": {
+      "actor": "agent:dispatch-agent",
+      "ratio": 55.45,
+      "actuator": "arm",
+      "region": "chest"
+    }
+  },
+  "actors": [
+    {
+      "key": "agent:dispatch-agent",
+      "kind": "agent",
+      "label": "dispatch-agent",
+      "entry": "Indirect prompt injection via Work-order tickets from the customer portal; Dock camera snapshots (the model reads text in the scene)",
+      "severity": "critical",
+      "robots_reachable": 12,
+      "robots_moving": 12,
+      "things": [
+        "kx1-01",
+        "kx1-02",
+        "kx1-03",
+        "kx1-04",
+        "kx1-05",
+        "kx1-06",
+        "kx1-07",
+        "kx1-08",
+        "kx1-09",
+        "kx1-10",
+        "kx1-11",
+        "kx1-12"
+      ],
+      "contact_speed_mps": {
+        "base": 2.0,
+        "arm": 4.79
+      },
+      "worst": {
+        "ratio": 55.45,
+        "actuator": "arm",
+        "region": "chest"
+      },
+      "exposure": {
+        "base": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 1.194,
+            "limit_j": 0.523,
+            "ratio": 2.28,
+            "safe_speed_mps": 1.323
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 3.932,
+            "limit_j": 1.28,
+            "ratio": 3.07,
+            "safe_speed_mps": 1.141
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 5.849,
+            "limit_j": 1.5,
+            "ratio": 3.9,
+            "safe_speed_mps": 1.013
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 59.524,
+            "limit_j": 1.568,
+            "ratio": 37.96,
+            "safe_speed_mps": 0.325
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 59.524,
+            "limit_j": 2.42,
+            "ratio": 24.6,
+            "safe_speed_mps": 0.403
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 91.186,
+            "limit_j": 1.936,
+            "ratio": 47.1,
+            "safe_speed_mps": 0.291
+          }
+        ],
+        "arm": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 6.468,
+            "limit_j": 0.523,
+            "ratio": 12.38,
+            "safe_speed_mps": 1.362
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 18.901,
+            "limit_j": 1.28,
+            "ratio": 14.77,
+            "safe_speed_mps": 1.247
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 26.056,
+            "limit_j": 1.5,
+            "ratio": 17.37,
+            "safe_speed_mps": 1.149
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 86.941,
+            "limit_j": 1.568,
+            "ratio": 55.45,
+            "safe_speed_mps": 0.643
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 86.941,
+            "limit_j": 2.42,
+            "ratio": 35.93,
+            "safe_speed_mps": 0.799
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 95.374,
+            "limit_j": 1.936,
+            "ratio": 49.26,
+            "safe_speed_mps": 0.682
+          }
+        ]
+      },
+      "routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "dispatch-agent.nudge \u2192 iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "planned",
+          "entry": "/move_action",
+          "how": "dispatch-agent.pick_item \u2192 iot:Publish fleet/kx1-01/cmd/pick",
+          "path": [
+            "/move_action",
+            "/move_group"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [
+            "MoveIt planning"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/move_group"
+          ],
+          "gated": false
+        },
+        {
+          "actuator": "base",
+          "kind": "nav",
+          "entry": "/navigate_to_pose",
+          "how": "dispatch-agent.navigate_to \u2192 iot:Publish fleet/kx1-01/cmd/navigate",
+          "path": [
+            "/navigate_to_pose",
+            "/controller_server",
+            "/velocity_smoother",
+            "/collision_monitor",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/controller_server",
+            "/velocity_smoother"
+          ],
+          "gated": false
+        }
+      ],
+      "worst_routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "dispatch-agent.nudge \u2192 iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "planned",
+          "entry": "/move_action",
+          "how": "dispatch-agent.pick_item \u2192 iot:Publish fleet/kx1-01/cmd/pick",
+          "path": [
+            "/move_action",
+            "/move_group"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [
+            "MoveIt planning"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/move_group"
+          ],
+          "gated": false
+        }
+      ],
+      "disabled_guards": [
+        "/collision_monitor"
+      ],
+      "stoppable_guards": [],
+      "escalations": [],
+      "findings": [
+        {
+          "check": "CZL-001",
+          "title": "Cloud identity can drive the base around the collision monitor",
+          "severity": "critical",
+          "actor": "agent:dispatch-agent",
+          "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+          "evidence": [
+            "dispatch-agent.nudge \u2192 iot:Publish fleet/kx1-01/cmd/velocity",
+            "/cmd_vel \u2192 /diff_drive_controller"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0855",
+            "T0880"
+          ],
+          "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-003",
+          "title": "Cloud identity can rewrite safety or speed parameters",
+          "severity": "high",
+          "actor": "agent:dispatch-agent",
+          "detail": "Can rewrite parameters on /collision_monitor, /controller_server, /move_group, /velocity_smoother.",
+          "evidence": [
+            "dispatch-agent.tune_speed \u2192 iot:Publish fleet/kx1-01/cmd/param"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0836"
+          ],
+          "fix": "Bridge an explicit allowlist of tunable parameters, never '*'. Keep safety limits in a read-only parameter file and enforce the hard limit in the motor drives or safety PLC.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-006",
+          "title": "AI agent reads untrusted input and can move robots without approval",
+          "severity": "critical",
+          "actor": "agent:dispatch-agent",
+          "detail": "dispatch-agent reads 2 untrusted input(s) and can move 12 robots with no human approval.",
+          "evidence": [
+            "Work-order tickets from the customer portal",
+            "Dock camera snapshots (the model reads text in the scene)"
+          ],
+          "robots": 12,
+          "attack": [
+            "AML.T0051.001",
+            "T0855"
+          ],
+          "fix": "Turn on human approval for motion tools, strip raw-motion tools from the agent, and scope the tool role to goal-level commands on specific robots.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-008",
+          "title": "One identity can move most of the fleet",
+          "severity": "medium",
+          "actor": "agent:dispatch-agent",
+          "detail": "Can move 12 of 12 robots.",
+          "evidence": [],
+          "robots": 12,
+          "attack": [
+            "T1078.004"
+          ],
+          "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-010",
+          "title": "Worst-case impact exceeds human pain thresholds",
+          "severity": "critical",
+          "actor": "agent:dispatch-agent",
+          "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+          "evidence": [
+            "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+            "Safe speed for this body region: 0.64 m/s"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0880",
+            "T0879"
+          ],
+          "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+          "accepted": null
+        }
+      ],
+      "attack_path": [
+        {
+          "layer": "entry",
+          "text": "Indirect prompt injection via Work-order tickets from the customer portal; Dock camera snapshots (the model reads text in the scene)"
+        },
+        {
+          "layer": "agent",
+          "text": "dispatch-agent.tune_speed"
+        },
+        {
+          "layer": "iot",
+          "text": "iot:Publish fleet/kx1-01/cmd/param: rewrites parameters on /move_group"
+        },
+        {
+          "layer": "agent",
+          "text": "dispatch-agent.pick_item"
+        },
+        {
+          "layer": "iot",
+          "text": "iot:Publish fleet/kx1-01/cmd/pick"
+        },
+        {
+          "layer": "edge",
+          "text": "kx1-edge-bridge on kx1-01 turns it into /move_action"
+        },
+        {
+          "layer": "ros",
+          "text": "/move_action \u2192 /move_group (caps and zones already lifted on /move_group)"
+        },
+        {
+          "layer": "physical",
+          "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+        }
+      ],
+      "attack_paths": {
+        "base": [
+          {
+            "layer": "entry",
+            "text": "Indirect prompt injection via Work-order tickets from the customer portal; Dock camera snapshots (the model reads text in the scene)"
+          },
+          {
+            "layer": "agent",
+            "text": "dispatch-agent.nudge"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/velocity"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /cmd_vel"
+          },
+          {
+            "layer": "ros",
+            "text": "/cmd_vel \u2192 /diff_drive_controller (never passes /collision_monitor)"
+          },
+          {
+            "layer": "physical",
+            "text": "Base reaches a person at 2.00 m/s: 91.2 J into the thigh and knee, 47x the 1.94 J limit"
+          }
+        ],
+        "arm": [
+          {
+            "layer": "entry",
+            "text": "Indirect prompt injection via Work-order tickets from the customer portal; Dock camera snapshots (the model reads text in the scene)"
+          },
+          {
+            "layer": "agent",
+            "text": "dispatch-agent.tune_speed"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/param: rewrites parameters on /move_group"
+          },
+          {
+            "layer": "agent",
+            "text": "dispatch-agent.pick_item"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/pick"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /move_action"
+          },
+          {
+            "layer": "ros",
+            "text": "/move_action \u2192 /move_group (caps and zones already lifted on /move_group)"
+          },
+          {
+            "layer": "physical",
+            "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+          }
+        ]
+      }
+    },
+    {
+      "key": "principal:fleet-tools-role",
+      "kind": "principal",
+      "label": "fleet-tools-role",
+      "entry": "Stolen credentials (Lambda execution role)",
+      "severity": "critical",
+      "robots_reachable": 12,
+      "robots_moving": 12,
+      "things": [
+        "kx1-01",
+        "kx1-02",
+        "kx1-03",
+        "kx1-04",
+        "kx1-05",
+        "kx1-06",
+        "kx1-07",
+        "kx1-08",
+        "kx1-09",
+        "kx1-10",
+        "kx1-11",
+        "kx1-12"
+      ],
+      "contact_speed_mps": {
+        "base": 2.0,
+        "arm": 4.79
+      },
+      "worst": {
+        "ratio": 55.45,
+        "actuator": "arm",
+        "region": "chest"
+      },
+      "exposure": {
+        "base": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 1.194,
+            "limit_j": 0.523,
+            "ratio": 2.28,
+            "safe_speed_mps": 1.323
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 3.932,
+            "limit_j": 1.28,
+            "ratio": 3.07,
+            "safe_speed_mps": 1.141
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 5.849,
+            "limit_j": 1.5,
+            "ratio": 3.9,
+            "safe_speed_mps": 1.013
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 59.524,
+            "limit_j": 1.568,
+            "ratio": 37.96,
+            "safe_speed_mps": 0.325
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 59.524,
+            "limit_j": 2.42,
+            "ratio": 24.6,
+            "safe_speed_mps": 0.403
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 91.186,
+            "limit_j": 1.936,
+            "ratio": 47.1,
+            "safe_speed_mps": 0.291
+          }
+        ],
+        "arm": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 6.468,
+            "limit_j": 0.523,
+            "ratio": 12.38,
+            "safe_speed_mps": 1.362
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 18.901,
+            "limit_j": 1.28,
+            "ratio": 14.77,
+            "safe_speed_mps": 1.247
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 26.056,
+            "limit_j": 1.5,
+            "ratio": 17.37,
+            "safe_speed_mps": 1.149
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 86.941,
+            "limit_j": 1.568,
+            "ratio": 55.45,
+            "safe_speed_mps": 0.643
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 86.941,
+            "limit_j": 2.42,
+            "ratio": 35.93,
+            "safe_speed_mps": 0.799
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 95.374,
+            "limit_j": 1.936,
+            "ratio": 49.26,
+            "safe_speed_mps": 0.682
+          }
+        ]
+      },
+      "routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "raw",
+          "entry": "/arm_controller/follow_joint_trajectory",
+          "how": "iot:Publish fleet/kx1-01/cmd/arm",
+          "path": [
+            "/arm_controller/follow_joint_trajectory",
+            "/arm_controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [
+            "MoveIt planning"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "planned",
+          "entry": "/move_action",
+          "how": "iot:Publish fleet/kx1-01/cmd/pick",
+          "path": [
+            "/move_action",
+            "/move_group"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [
+            "MoveIt planning"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/move_group"
+          ],
+          "gated": false
+        },
+        {
+          "actuator": "base",
+          "kind": "nav",
+          "entry": "/navigate_to_pose",
+          "how": "iot:Publish fleet/kx1-01/cmd/navigate",
+          "path": [
+            "/navigate_to_pose",
+            "/controller_server",
+            "/velocity_smoother",
+            "/collision_monitor",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/controller_server",
+            "/velocity_smoother"
+          ],
+          "gated": false
+        }
+      ],
+      "worst_routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "raw",
+          "entry": "/arm_controller/follow_joint_trajectory",
+          "how": "iot:Publish fleet/kx1-01/cmd/arm",
+          "path": [
+            "/arm_controller/follow_joint_trajectory",
+            "/arm_controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [
+            "MoveIt planning"
+          ],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "disabled_guards": [
+        "/collision_monitor"
+      ],
+      "stoppable_guards": [
+        "/collision_monitor"
+      ],
+      "escalations": [],
+      "findings": [
+        {
+          "check": "CZL-001",
+          "title": "Cloud identity can drive the base around the collision monitor",
+          "severity": "critical",
+          "actor": "principal:fleet-tools-role",
+          "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/velocity",
+            "/cmd_vel \u2192 /diff_drive_controller"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0855",
+            "T0880"
+          ],
+          "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-002",
+          "title": "Cloud identity can shut down a safety node",
+          "severity": "high",
+          "actor": "principal:fleet-tools-role",
+          "detail": "Can deactivate /collision_monitor on 12 robots.",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/lifecycle"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0813",
+            "T0880"
+          ],
+          "fix": "Do not bridge lifecycle services. Use SROS2 to deny change_state on safety nodes to the bridge enclave.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-003",
+          "title": "Cloud identity can rewrite safety or speed parameters",
+          "severity": "high",
+          "actor": "principal:fleet-tools-role",
+          "detail": "Can rewrite parameters on /collision_monitor, /controller_server, /move_group, /velocity_smoother.",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/param"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0836"
+          ],
+          "fix": "Bridge an explicit allowlist of tunable parameters, never '*'. Keep safety limits in a read-only parameter file and enforce the hard limit in the motor drives or safety PLC.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-004",
+          "title": "Cloud identity can send raw arm trajectories",
+          "severity": "high",
+          "actor": "principal:fleet-tools-role",
+          "detail": "Raw trajectories on /arm_controller/follow_joint_trajectory can move the tool tip at up to 4.79 m/s.",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/arm"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0831",
+            "T0855"
+          ],
+          "fix": "Expose only planned motion (MoveGroup) through the bridge, with a low velocity scaling factor, and require human approval for arm motion near people.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-008",
+          "title": "One identity can move most of the fleet",
+          "severity": "medium",
+          "actor": "principal:fleet-tools-role",
+          "detail": "Can move 12 of 12 robots.",
+          "evidence": [],
+          "robots": 12,
+          "attack": [
+            "T1078.004"
+          ],
+          "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-010",
+          "title": "Worst-case impact exceeds human pain thresholds",
+          "severity": "critical",
+          "actor": "principal:fleet-tools-role",
+          "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+          "evidence": [
+            "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+            "Safe speed for this body region: 0.64 m/s"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0880",
+            "T0879"
+          ],
+          "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+          "accepted": null
+        }
+      ],
+      "attack_path": [
+        {
+          "layer": "entry",
+          "text": "Stolen credentials (Lambda execution role)"
+        },
+        {
+          "layer": "iot",
+          "text": "iot:Publish fleet/kx1-01/cmd/arm"
+        },
+        {
+          "layer": "edge",
+          "text": "kx1-edge-bridge on kx1-01 turns it into /arm_controller/follow_joint_trajectory"
+        },
+        {
+          "layer": "ros",
+          "text": "/arm_controller/follow_joint_trajectory \u2192 /arm_controller (never passes MoveIt planning)"
+        },
+        {
+          "layer": "physical",
+          "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+        }
+      ],
+      "attack_paths": {
+        "base": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Lambda execution role)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/velocity"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /cmd_vel"
+          },
+          {
+            "layer": "ros",
+            "text": "/cmd_vel \u2192 /diff_drive_controller (never passes /collision_monitor)"
+          },
+          {
+            "layer": "physical",
+            "text": "Base reaches a person at 2.00 m/s: 91.2 J into the thigh and knee, 47x the 1.94 J limit"
+          }
+        ],
+        "arm": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Lambda execution role)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/arm"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /arm_controller/follow_joint_trajectory"
+          },
+          {
+            "layer": "ros",
+            "text": "/arm_controller/follow_joint_trajectory \u2192 /arm_controller (never passes MoveIt planning)"
+          },
+          {
+            "layer": "physical",
+            "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+          }
+        ]
+      }
+    },
+    {
+      "key": "principal:ops-console-role",
+      "kind": "principal",
+      "label": "ops-console-role",
+      "entry": "Stolen credentials (Cognito-federated sessions in operators' browsers)",
+      "severity": "critical",
+      "robots_reachable": 12,
+      "robots_moving": 12,
+      "things": [
+        "kx1-01",
+        "kx1-02",
+        "kx1-03",
+        "kx1-04",
+        "kx1-05",
+        "kx1-06",
+        "kx1-07",
+        "kx1-08",
+        "kx1-09",
+        "kx1-10",
+        "kx1-11",
+        "kx1-12"
+      ],
+      "contact_speed_mps": {
+        "base": 2.0,
+        "arm": 4.79
+      },
+      "worst": {
+        "ratio": 55.45,
+        "actuator": "arm",
+        "region": "chest"
+      },
+      "exposure": {
+        "base": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 1.194,
+            "limit_j": 0.523,
+            "ratio": 2.28,
+            "safe_speed_mps": 1.323
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 3.932,
+            "limit_j": 1.28,
+            "ratio": 3.07,
+            "safe_speed_mps": 1.141
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 5.849,
+            "limit_j": 1.5,
+            "ratio": 3.9,
+            "safe_speed_mps": 1.013
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 59.524,
+            "limit_j": 1.568,
+            "ratio": 37.96,
+            "safe_speed_mps": 0.325
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 59.524,
+            "limit_j": 2.42,
+            "ratio": 24.6,
+            "safe_speed_mps": 0.403
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 91.186,
+            "limit_j": 1.936,
+            "ratio": 47.1,
+            "safe_speed_mps": 0.291
+          }
+        ],
+        "arm": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 6.468,
+            "limit_j": 0.523,
+            "ratio": 12.38,
+            "safe_speed_mps": 1.362
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 18.901,
+            "limit_j": 1.28,
+            "ratio": 14.77,
+            "safe_speed_mps": 1.247
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 26.056,
+            "limit_j": 1.5,
+            "ratio": 17.37,
+            "safe_speed_mps": 1.149
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 86.941,
+            "limit_j": 1.568,
+            "ratio": 55.45,
+            "safe_speed_mps": 0.643
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 86.941,
+            "limit_j": 2.42,
+            "ratio": 35.93,
+            "safe_speed_mps": 0.799
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 95.374,
+            "limit_j": 1.936,
+            "ratio": 49.26,
+            "safe_speed_mps": 0.682
+          }
+        ]
+      },
+      "routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "raw",
+          "entry": "/arm_controller/follow_joint_trajectory",
+          "how": "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role) \u2192 iot:Publish fleet/kx1-01/cmd/arm",
+          "path": [
+            "/arm_controller/follow_joint_trajectory",
+            "/arm_controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [
+            "MoveIt planning"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "planned",
+          "entry": "/move_action",
+          "how": "ops-console-role invokes agent dispatch-agent \u2192 dispatch-agent.pick_item \u2192 iot:Publish fleet/kx1-01/cmd/pick",
+          "path": [
+            "/move_action",
+            "/move_group"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [
+            "MoveIt planning"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/move_group"
+          ],
+          "gated": false
+        },
+        {
+          "actuator": "base",
+          "kind": "nav",
+          "entry": "/navigate_to_pose",
+          "how": "iot:Publish fleet/kx1-01/cmd/navigate",
+          "path": [
+            "/navigate_to_pose",
+            "/controller_server",
+            "/velocity_smoother",
+            "/collision_monitor",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/controller_server",
+            "/velocity_smoother"
+          ],
+          "gated": false
+        }
+      ],
+      "worst_routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "raw",
+          "entry": "/arm_controller/follow_joint_trajectory",
+          "how": "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role) \u2192 iot:Publish fleet/kx1-01/cmd/arm",
+          "path": [
+            "/arm_controller/follow_joint_trajectory",
+            "/arm_controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [
+            "MoveIt planning"
+          ],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "disabled_guards": [
+        "/collision_monitor"
+      ],
+      "stoppable_guards": [
+        "/collision_monitor"
+      ],
+      "escalations": [
+        "ops-console-role invokes agent dispatch-agent",
+        "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role)",
+        "ops-console-role rewrites Lambda fleet-nudge (runs as fleet-tools-role)",
+        "ops-console-role rewrites Lambda fleet-pick (runs as fleet-tools-role)",
+        "ops-console-role rewrites Lambda fleet-tune (runs as fleet-tools-role)"
+      ],
+      "findings": [
+        {
+          "check": "CZL-001",
+          "title": "Cloud identity can drive the base around the collision monitor",
+          "severity": "critical",
+          "actor": "principal:ops-console-role",
+          "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/velocity",
+            "/cmd_vel \u2192 /diff_drive_controller"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0855",
+            "T0880"
+          ],
+          "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-002",
+          "title": "Cloud identity can shut down a safety node",
+          "severity": "high",
+          "actor": "principal:ops-console-role",
+          "detail": "Can deactivate /collision_monitor on 12 robots.",
+          "evidence": [
+            "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role) \u2192 iot:Publish fleet/kx1-01/cmd/lifecycle"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0813",
+            "T0880"
+          ],
+          "fix": "Do not bridge lifecycle services. Use SROS2 to deny change_state on safety nodes to the bridge enclave.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-003",
+          "title": "Cloud identity can rewrite safety or speed parameters",
+          "severity": "high",
+          "actor": "principal:ops-console-role",
+          "detail": "Can rewrite parameters on /collision_monitor, /controller_server, /move_group, /velocity_smoother.",
+          "evidence": [
+            "ops-console-role invokes agent dispatch-agent \u2192 dispatch-agent.tune_speed \u2192 iot:Publish fleet/kx1-01/cmd/param"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0836"
+          ],
+          "fix": "Bridge an explicit allowlist of tunable parameters, never '*'. Keep safety limits in a read-only parameter file and enforce the hard limit in the motor drives or safety PLC.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-004",
+          "title": "Cloud identity can send raw arm trajectories",
+          "severity": "high",
+          "actor": "principal:ops-console-role",
+          "detail": "Raw trajectories on /arm_controller/follow_joint_trajectory can move the tool tip at up to 4.79 m/s.",
+          "evidence": [
+            "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role) \u2192 iot:Publish fleet/kx1-01/cmd/arm"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0831",
+            "T0855"
+          ],
+          "fix": "Expose only planned motion (MoveGroup) through the bridge, with a low velocity scaling factor, and require human approval for arm motion near people.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-007",
+          "title": "Identity can take over an AI agent or its tools",
+          "severity": "high",
+          "actor": "principal:ops-console-role",
+          "detail": "Inherits reach through an AI agent or its tools.",
+          "evidence": [
+            "ops-console-role invokes agent dispatch-agent",
+            "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role)",
+            "ops-console-role rewrites Lambda fleet-nudge (runs as fleet-tools-role)",
+            "ops-console-role rewrites Lambda fleet-pick (runs as fleet-tools-role)",
+            "ops-console-role rewrites Lambda fleet-tune (runs as fleet-tools-role)"
+          ],
+          "robots": 12,
+          "attack": [
+            "T1648",
+            "T1078.004"
+          ],
+          "fix": "Remove lambda:UpdateFunctionCode from operator roles, scope tool roles to exact topics, and use Lambda code signing on agent tools.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-008",
+          "title": "One identity can move most of the fleet",
+          "severity": "medium",
+          "actor": "principal:ops-console-role",
+          "detail": "Can move 12 of 12 robots.",
+          "evidence": [],
+          "robots": 12,
+          "attack": [
+            "T1078.004"
+          ],
+          "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-010",
+          "title": "Worst-case impact exceeds human pain thresholds",
+          "severity": "critical",
+          "actor": "principal:ops-console-role",
+          "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+          "evidence": [
+            "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+            "Safe speed for this body region: 0.64 m/s"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0880",
+            "T0879"
+          ],
+          "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+          "accepted": null
+        }
+      ],
+      "attack_path": [
+        {
+          "layer": "entry",
+          "text": "Stolen credentials (Cognito-federated sessions in operators' browsers)"
+        },
+        {
+          "layer": "cloud",
+          "text": "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role)"
+        },
+        {
+          "layer": "iot",
+          "text": "iot:Publish fleet/kx1-01/cmd/arm"
+        },
+        {
+          "layer": "edge",
+          "text": "kx1-edge-bridge on kx1-01 turns it into /arm_controller/follow_joint_trajectory"
+        },
+        {
+          "layer": "ros",
+          "text": "/arm_controller/follow_joint_trajectory \u2192 /arm_controller (never passes MoveIt planning)"
+        },
+        {
+          "layer": "physical",
+          "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+        }
+      ],
+      "attack_paths": {
+        "base": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Cognito-federated sessions in operators' browsers)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/velocity"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /cmd_vel"
+          },
+          {
+            "layer": "ros",
+            "text": "/cmd_vel \u2192 /diff_drive_controller (never passes /collision_monitor)"
+          },
+          {
+            "layer": "physical",
+            "text": "Base reaches a person at 2.00 m/s: 91.2 J into the thigh and knee, 47x the 1.94 J limit"
+          }
+        ],
+        "arm": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Cognito-federated sessions in operators' browsers)"
+          },
+          {
+            "layer": "cloud",
+            "text": "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/arm"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /arm_controller/follow_joint_trajectory"
+          },
+          {
+            "layer": "ros",
+            "text": "/arm_controller/follow_joint_trajectory \u2192 /arm_controller (never passes MoveIt planning)"
+          },
+          {
+            "layer": "physical",
+            "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+          }
+        ]
+      }
+    },
+    {
+      "key": "principal:release-pipeline-role",
+      "kind": "principal",
+      "label": "release-pipeline-role",
+      "entry": "Stolen credentials (GitHub OIDC; trust policy allows any branch of harbor/robot-stack)",
+      "severity": "critical",
+      "robots_reachable": 12,
+      "robots_moving": 12,
+      "things": [
+        "kx1-01",
+        "kx1-02",
+        "kx1-03",
+        "kx1-04",
+        "kx1-05",
+        "kx1-06",
+        "kx1-07",
+        "kx1-08",
+        "kx1-09",
+        "kx1-10",
+        "kx1-11",
+        "kx1-12"
+      ],
+      "contact_speed_mps": {
+        "base": 2.0,
+        "arm": 4.79
+      },
+      "worst": {
+        "ratio": 55.45,
+        "actuator": "arm",
+        "region": "chest"
+      },
+      "exposure": {
+        "base": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 1.194,
+            "limit_j": 0.523,
+            "ratio": 2.28,
+            "safe_speed_mps": 1.323
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 3.932,
+            "limit_j": 1.28,
+            "ratio": 3.07,
+            "safe_speed_mps": 1.141
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 5.849,
+            "limit_j": 1.5,
+            "ratio": 3.9,
+            "safe_speed_mps": 1.013
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 59.524,
+            "limit_j": 1.568,
+            "ratio": 37.96,
+            "safe_speed_mps": 0.325
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 59.524,
+            "limit_j": 2.42,
+            "ratio": 24.6,
+            "safe_speed_mps": 0.403
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 91.186,
+            "limit_j": 1.936,
+            "ratio": 47.1,
+            "safe_speed_mps": 0.291
+          }
+        ],
+        "arm": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 6.468,
+            "limit_j": 0.523,
+            "ratio": 12.38,
+            "safe_speed_mps": 1.362
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 18.901,
+            "limit_j": 1.28,
+            "ratio": 14.77,
+            "safe_speed_mps": 1.247
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 26.056,
+            "limit_j": 1.5,
+            "ratio": 17.37,
+            "safe_speed_mps": 1.149
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 86.941,
+            "limit_j": 1.568,
+            "ratio": 55.45,
+            "safe_speed_mps": 0.643
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 86.941,
+            "limit_j": 2.42,
+            "ratio": 35.93,
+            "safe_speed_mps": 0.799
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 95.374,
+            "limit_j": 1.936,
+            "ratio": 49.26,
+            "safe_speed_mps": 0.682
+          }
+        ]
+      },
+      "routes": [
+        {
+          "actuator": "base",
+          "kind": "code",
+          "entry": "robot software",
+          "how": "greengrass:CreateDeployment on kx1-fleet",
+          "path": [
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "code",
+          "entry": "robot software",
+          "how": "greengrass:CreateDeployment on kx1-fleet",
+          "path": [
+            "arm controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "worst_routes": [
+        {
+          "actuator": "base",
+          "kind": "code",
+          "entry": "robot software",
+          "how": "greengrass:CreateDeployment on kx1-fleet",
+          "path": [
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "code",
+          "entry": "robot software",
+          "how": "greengrass:CreateDeployment on kx1-fleet",
+          "path": [
+            "arm controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "disabled_guards": [
+        "/collision_monitor"
+      ],
+      "stoppable_guards": [
+        "/collision_monitor"
+      ],
+      "escalations": [],
+      "findings": [
+        {
+          "check": "CZL-005",
+          "title": "Cloud identity can run code on the robots",
+          "severity": "critical",
+          "actor": "principal:release-pipeline-role",
+          "detail": "Can push software to 12 robots.",
+          "evidence": [
+            "greengrass:CreateDeployment on kx1-fleet"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0843",
+            "T1648"
+          ],
+          "fix": "Limit greengrass:CreateDeployment and iot:CreateJob to the release pipeline, require signed components, and gate fleet-wide deployments behind a human approval step.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-008",
+          "title": "One identity can move most of the fleet",
+          "severity": "medium",
+          "actor": "principal:release-pipeline-role",
+          "detail": "Can move 12 of 12 robots.",
+          "evidence": [],
+          "robots": 12,
+          "attack": [
+            "T1078.004"
+          ],
+          "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-010",
+          "title": "Worst-case impact exceeds human pain thresholds",
+          "severity": "critical",
+          "actor": "principal:release-pipeline-role",
+          "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+          "evidence": [
+            "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+            "Safe speed for this body region: 0.64 m/s"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0880",
+            "T0879"
+          ],
+          "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+          "accepted": null
+        }
+      ],
+      "attack_path": [
+        {
+          "layer": "entry",
+          "text": "Stolen credentials (GitHub OIDC; trust policy allows any branch of harbor/robot-stack)"
+        },
+        {
+          "layer": "iot",
+          "text": "greengrass:CreateDeployment on kx1-fleet"
+        },
+        {
+          "layer": "edge",
+          "text": "New software runs on kx1-01 with full hardware access"
+        },
+        {
+          "layer": "ros",
+          "text": "arm controller"
+        },
+        {
+          "layer": "physical",
+          "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+        }
+      ],
+      "attack_paths": {
+        "base": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (GitHub OIDC; trust policy allows any branch of harbor/robot-stack)"
+          },
+          {
+            "layer": "iot",
+            "text": "greengrass:CreateDeployment on kx1-fleet"
+          },
+          {
+            "layer": "edge",
+            "text": "New software runs on kx1-01 with full hardware access"
+          },
+          {
+            "layer": "ros",
+            "text": "/diff_drive_controller (never passes /collision_monitor)"
+          },
+          {
+            "layer": "physical",
+            "text": "Base reaches a person at 2.00 m/s: 91.2 J into the thigh and knee, 47x the 1.94 J limit"
+          }
+        ],
+        "arm": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (GitHub OIDC; trust policy allows any branch of harbor/robot-stack)"
+          },
+          {
+            "layer": "iot",
+            "text": "greengrass:CreateDeployment on kx1-fleet"
+          },
+          {
+            "layer": "edge",
+            "text": "New software runs on kx1-01 with full hardware access"
+          },
+          {
+            "layer": "ros",
+            "text": "arm controller"
+          },
+          {
+            "layer": "physical",
+            "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+          }
+        ]
+      }
+    },
+    {
+      "key": "principal:vendor-support",
+      "kind": "principal",
+      "label": "vendor-support",
+      "entry": "Stolen credentials (Long-lived access key created 2025-09-12, never rotated, shared across the vendor's support team)",
+      "severity": "critical",
+      "robots_reachable": 12,
+      "robots_moving": 12,
+      "things": [
+        "kx1-01",
+        "kx1-02",
+        "kx1-03",
+        "kx1-04",
+        "kx1-05",
+        "kx1-06",
+        "kx1-07",
+        "kx1-08",
+        "kx1-09",
+        "kx1-10",
+        "kx1-11",
+        "kx1-12"
+      ],
+      "contact_speed_mps": {
+        "base": 2.0,
+        "arm": 4.79
+      },
+      "worst": {
+        "ratio": 55.45,
+        "actuator": "arm",
+        "region": "chest"
+      },
+      "exposure": {
+        "base": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 1.194,
+            "limit_j": 0.523,
+            "ratio": 2.28,
+            "safe_speed_mps": 1.323
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 3.932,
+            "limit_j": 1.28,
+            "ratio": 3.07,
+            "safe_speed_mps": 1.141
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 5.849,
+            "limit_j": 1.5,
+            "ratio": 3.9,
+            "safe_speed_mps": 1.013
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 59.524,
+            "limit_j": 1.568,
+            "ratio": 37.96,
+            "safe_speed_mps": 0.325
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 59.524,
+            "limit_j": 2.42,
+            "ratio": 24.6,
+            "safe_speed_mps": 0.403
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 91.186,
+            "limit_j": 1.936,
+            "ratio": 47.1,
+            "safe_speed_mps": 0.291
+          }
+        ],
+        "arm": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 6.468,
+            "limit_j": 0.523,
+            "ratio": 12.38,
+            "safe_speed_mps": 1.362
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 18.901,
+            "limit_j": 1.28,
+            "ratio": 14.77,
+            "safe_speed_mps": 1.247
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 26.056,
+            "limit_j": 1.5,
+            "ratio": 17.37,
+            "safe_speed_mps": 1.149
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 86.941,
+            "limit_j": 1.568,
+            "ratio": 55.45,
+            "safe_speed_mps": 0.643
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 86.941,
+            "limit_j": 2.42,
+            "ratio": 35.93,
+            "safe_speed_mps": 0.799
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 95.374,
+            "limit_j": 1.936,
+            "ratio": 49.26,
+            "safe_speed_mps": 0.682
+          }
+        ]
+      },
+      "routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "raw",
+          "entry": "/arm_controller/follow_joint_trajectory",
+          "how": "iot:Publish fleet/kx1-01/cmd/arm",
+          "path": [
+            "/arm_controller/follow_joint_trajectory",
+            "/arm_controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [
+            "MoveIt planning"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "planned",
+          "entry": "/move_action",
+          "how": "iot:Publish fleet/kx1-01/cmd/pick",
+          "path": [
+            "/move_action",
+            "/move_group"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [
+            "MoveIt planning"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/move_group"
+          ],
+          "gated": false
+        },
+        {
+          "actuator": "base",
+          "kind": "nav",
+          "entry": "/navigate_to_pose",
+          "how": "iot:Publish fleet/kx1-01/cmd/navigate",
+          "path": [
+            "/navigate_to_pose",
+            "/controller_server",
+            "/velocity_smoother",
+            "/collision_monitor",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [
+            "/controller_server",
+            "/velocity_smoother"
+          ],
+          "gated": false
+        },
+        {
+          "actuator": "base",
+          "kind": "code",
+          "entry": "robot software",
+          "how": "iot:CreateJob with a shell job handler on kx1-fleet",
+          "path": [
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "code",
+          "entry": "robot software",
+          "how": "iot:CreateJob with a shell job handler on kx1-fleet",
+          "path": [
+            "arm controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "worst_routes": [
+        {
+          "actuator": "base",
+          "kind": "direct",
+          "entry": "/cmd_vel",
+          "how": "iot:Publish fleet/kx1-01/cmd/velocity",
+          "path": [
+            "/cmd_vel",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 2.0,
+          "contact_speed_mps": 2.0,
+          "active_guards": [],
+          "bypassed_guards": [
+            "/collision_monitor"
+          ],
+          "unlocked": [],
+          "gated": false
+        },
+        {
+          "actuator": "arm",
+          "kind": "raw",
+          "entry": "/arm_controller/follow_joint_trajectory",
+          "how": "iot:Publish fleet/kx1-01/cmd/arm",
+          "path": [
+            "/arm_controller/follow_joint_trajectory",
+            "/arm_controller"
+          ],
+          "speed_mps": 4.79,
+          "contact_speed_mps": 4.79,
+          "active_guards": [],
+          "bypassed_guards": [
+            "MoveIt planning"
+          ],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "disabled_guards": [
+        "/collision_monitor"
+      ],
+      "stoppable_guards": [
+        "/collision_monitor"
+      ],
+      "escalations": [],
+      "findings": [
+        {
+          "check": "CZL-001",
+          "title": "Cloud identity can drive the base around the collision monitor",
+          "severity": "critical",
+          "actor": "principal:vendor-support",
+          "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/velocity",
+            "/cmd_vel \u2192 /diff_drive_controller"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0855",
+            "T0880"
+          ],
+          "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-004",
+          "title": "Cloud identity can send raw arm trajectories",
+          "severity": "high",
+          "actor": "principal:vendor-support",
+          "detail": "Raw trajectories on /arm_controller/follow_joint_trajectory can move the tool tip at up to 4.79 m/s.",
+          "evidence": [
+            "iot:Publish fleet/kx1-01/cmd/arm"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0831",
+            "T0855"
+          ],
+          "fix": "Expose only planned motion (MoveGroup) through the bridge, with a low velocity scaling factor, and require human approval for arm motion near people.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-005",
+          "title": "Cloud identity can run code on the robots",
+          "severity": "critical",
+          "actor": "principal:vendor-support",
+          "detail": "Can push software to 12 robots.",
+          "evidence": [
+            "iot:CreateJob with a shell job handler on kx1-fleet"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0843",
+            "T1648"
+          ],
+          "fix": "Limit greengrass:CreateDeployment and iot:CreateJob to the release pipeline, require signed components, and gate fleet-wide deployments behind a human approval step.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-008",
+          "title": "One identity can move most of the fleet",
+          "severity": "medium",
+          "actor": "principal:vendor-support",
+          "detail": "Can move 12 of 12 robots.",
+          "evidence": [],
+          "robots": 12,
+          "attack": [
+            "T1078.004"
+          ],
+          "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+          "accepted": null
+        },
+        {
+          "check": "CZL-010",
+          "title": "Worst-case impact exceeds human pain thresholds",
+          "severity": "critical",
+          "actor": "principal:vendor-support",
+          "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+          "evidence": [
+            "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+            "Safe speed for this body region: 0.64 m/s"
+          ],
+          "robots": 12,
+          "attack": [
+            "T0880",
+            "T0879"
+          ],
+          "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+          "accepted": null
+        }
+      ],
+      "attack_path": [
+        {
+          "layer": "entry",
+          "text": "Stolen credentials (Long-lived access key created 2025-09-12, never rotated, shared across the vendor's support team)"
+        },
+        {
+          "layer": "iot",
+          "text": "iot:Publish fleet/kx1-01/cmd/arm"
+        },
+        {
+          "layer": "edge",
+          "text": "kx1-edge-bridge on kx1-01 turns it into /arm_controller/follow_joint_trajectory"
+        },
+        {
+          "layer": "ros",
+          "text": "/arm_controller/follow_joint_trajectory \u2192 /arm_controller (never passes MoveIt planning)"
+        },
+        {
+          "layer": "physical",
+          "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+        }
+      ],
+      "attack_paths": {
+        "base": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Long-lived access key created 2025-09-12, never rotated, shared across the vendor's support team)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/velocity"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /cmd_vel"
+          },
+          {
+            "layer": "ros",
+            "text": "/cmd_vel \u2192 /diff_drive_controller (never passes /collision_monitor)"
+          },
+          {
+            "layer": "physical",
+            "text": "Base reaches a person at 2.00 m/s: 91.2 J into the thigh and knee, 47x the 1.94 J limit"
+          }
+        ],
+        "arm": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Long-lived access key created 2025-09-12, never rotated, shared across the vendor's support team)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/arm"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /arm_controller/follow_joint_trajectory"
+          },
+          {
+            "layer": "ros",
+            "text": "/arm_controller/follow_joint_trajectory \u2192 /arm_controller (never passes MoveIt planning)"
+          },
+          {
+            "layer": "physical",
+            "text": "Arm reaches a person at 4.79 m/s: 86.9 J into the chest, 55x the 1.57 J limit"
+          }
+        ]
+      }
+    },
+    {
+      "key": "agent:inventory-agent",
+      "kind": "agent",
+      "label": "inventory-agent",
+      "entry": "Indirect prompt injection via Supplier advance-shipping notices (email)",
+      "severity": "info",
+      "robots_reachable": 0,
+      "robots_moving": 0,
+      "things": [],
+      "contact_speed_mps": {},
+      "worst": {
+        "ratio": 0.0,
+        "actuator": "",
+        "region": ""
+      },
+      "exposure": {},
+      "routes": [],
+      "worst_routes": [],
+      "disabled_guards": [],
+      "stoppable_guards": [],
+      "escalations": [],
+      "findings": [],
+      "attack_path": [],
+      "attack_paths": {}
+    },
+    {
+      "key": "principal:dispatch-agent-role",
+      "kind": "principal",
+      "label": "dispatch-agent-role",
+      "entry": "Stolen credentials (Assumed by AgentCore; temporary credentials only)",
+      "severity": "info",
+      "robots_reachable": 0,
+      "robots_moving": 0,
+      "things": [],
+      "contact_speed_mps": {},
+      "worst": {
+        "ratio": 0.0,
+        "actuator": "",
+        "region": ""
+      },
+      "exposure": {},
+      "routes": [],
+      "worst_routes": [],
+      "disabled_guards": [],
+      "stoppable_guards": [],
+      "escalations": [],
+      "findings": [],
+      "attack_path": [],
+      "attack_paths": {}
+    },
+    {
+      "key": "principal:site-supervisor-role",
+      "kind": "principal",
+      "label": "site-supervisor-role",
+      "entry": "Stolen credentials (Cognito-federated sessions on one tablet)",
+      "severity": "info",
+      "robots_reachable": 4,
+      "robots_moving": 4,
+      "things": [
+        "kx1-01",
+        "kx1-02",
+        "kx1-03",
+        "kx1-04"
+      ],
+      "contact_speed_mps": {
+        "base": 0.0,
+        "arm": 0.0
+      },
+      "worst": {
+        "ratio": 0.0,
+        "actuator": "",
+        "region": ""
+      },
+      "exposure": {
+        "base": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 0.0,
+            "limit_j": 0.523,
+            "ratio": 0.0,
+            "safe_speed_mps": 1.323
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 0.0,
+            "limit_j": 1.28,
+            "ratio": 0.0,
+            "safe_speed_mps": 1.141
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 0.0,
+            "limit_j": 1.5,
+            "ratio": 0.0,
+            "safe_speed_mps": 1.013
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 0.0,
+            "limit_j": 1.568,
+            "ratio": 0.0,
+            "safe_speed_mps": 0.325
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 0.0,
+            "limit_j": 2.42,
+            "ratio": 0.0,
+            "safe_speed_mps": 0.403
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 0.0,
+            "limit_j": 1.936,
+            "ratio": 0.0,
+            "safe_speed_mps": 0.291
+          }
+        ],
+        "arm": [
+          {
+            "region": "hand",
+            "label": "Hand and fingers",
+            "energy_j": 0.0,
+            "limit_j": 0.523,
+            "ratio": 0.0,
+            "safe_speed_mps": 1.362
+          },
+          {
+            "region": "forearm",
+            "label": "Lower arm and wrist",
+            "energy_j": 0.0,
+            "limit_j": 1.28,
+            "ratio": 0.0,
+            "safe_speed_mps": 1.247
+          },
+          {
+            "region": "upper_arm",
+            "label": "Upper arm and elbow",
+            "energy_j": 0.0,
+            "limit_j": 1.5,
+            "ratio": 0.0,
+            "safe_speed_mps": 1.149
+          },
+          {
+            "region": "chest",
+            "label": "Chest",
+            "energy_j": 0.0,
+            "limit_j": 1.568,
+            "ratio": 0.0,
+            "safe_speed_mps": 0.643
+          },
+          {
+            "region": "abdomen",
+            "label": "Abdomen",
+            "energy_j": 0.0,
+            "limit_j": 2.42,
+            "ratio": 0.0,
+            "safe_speed_mps": 0.799
+          },
+          {
+            "region": "thigh",
+            "label": "Thigh and knee",
+            "energy_j": 0.0,
+            "limit_j": 1.936,
+            "ratio": 0.0,
+            "safe_speed_mps": 0.682
+          }
+        ]
+      },
+      "routes": [
+        {
+          "actuator": "base",
+          "kind": "nav",
+          "entry": "/navigate_to_pose",
+          "how": "iot:Publish fleet/kx1-01/cmd/navigate",
+          "path": [
+            "/navigate_to_pose",
+            "/controller_server",
+            "/velocity_smoother",
+            "/collision_monitor",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 0.5,
+          "contact_speed_mps": 0.0,
+          "active_guards": [
+            "/collision_monitor"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "worst_routes": [
+        {
+          "actuator": "base",
+          "kind": "nav",
+          "entry": "/navigate_to_pose",
+          "how": "iot:Publish fleet/kx1-01/cmd/navigate",
+          "path": [
+            "/navigate_to_pose",
+            "/controller_server",
+            "/velocity_smoother",
+            "/collision_monitor",
+            "/diff_drive_controller"
+          ],
+          "speed_mps": 0.5,
+          "contact_speed_mps": 0.0,
+          "active_guards": [
+            "/collision_monitor"
+          ],
+          "bypassed_guards": [],
+          "unlocked": [],
+          "gated": false
+        }
+      ],
+      "disabled_guards": [],
+      "stoppable_guards": [],
+      "escalations": [],
+      "findings": [],
+      "attack_path": [],
+      "attack_paths": {
+        "base": [
+          {
+            "layer": "entry",
+            "text": "Stolen credentials (Cognito-federated sessions on one tablet)"
+          },
+          {
+            "layer": "iot",
+            "text": "iot:Publish fleet/kx1-01/cmd/navigate"
+          },
+          {
+            "layer": "edge",
+            "text": "kx1-edge-bridge on kx1-01 turns it into /navigate_to_pose"
+          },
+          {
+            "layer": "ros",
+            "text": "/navigate_to_pose \u2192 /controller_server \u2192 /velocity_smoother \u2192 /collision_monitor \u2192 /diff_drive_controller"
+          },
+          {
+            "layer": "blocked",
+            "text": "Blocked: /collision_monitor stops the base before it reaches a person"
+          }
+        ],
+        "arm": []
+      }
+    },
+    {
+      "key": "principal:telemetry-analytics-role",
+      "kind": "principal",
+      "label": "telemetry-analytics-role",
+      "entry": "Stolen credentials (Glue job role)",
+      "severity": "info",
+      "robots_reachable": 0,
+      "robots_moving": 0,
+      "things": [],
+      "contact_speed_mps": {},
+      "worst": {
+        "ratio": 0.0,
+        "actuator": "",
+        "region": ""
+      },
+      "exposure": {},
+      "routes": [],
+      "worst_routes": [],
+      "disabled_guards": [],
+      "stoppable_guards": [],
+      "escalations": [],
+      "findings": [],
+      "attack_path": [],
+      "attack_paths": {}
+    }
+  ],
+  "network": [
+    {
+      "check": "CZL-009",
+      "title": "Robot network accepts unauthenticated ROS commands",
+      "severity": "high",
+      "actor": "network:kx1",
+      "detail": "KX-1 mobile manipulator: SROS2 off and rosbridge open on 0.0.0.0:9090.",
+      "evidence": [
+        "ROS_SECURITY_ENABLE=false, domain 7",
+        "rosbridge auth: none"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0855",
+        "T0886"
+      ],
+      "fix": "Enable SROS2 with Enforce strategy and per-enclave permissions, and bind rosbridge to localhost or put it behind authentication.",
+      "accepted": null
+    }
+  ],
+  "findings": [
+    {
+      "check": "CZL-001",
+      "title": "Cloud identity can drive the base around the collision monitor",
+      "severity": "critical",
+      "actor": "agent:dispatch-agent",
+      "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+      "evidence": [
+        "dispatch-agent.nudge \u2192 iot:Publish fleet/kx1-01/cmd/velocity",
+        "/cmd_vel \u2192 /diff_drive_controller"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0855",
+        "T0880"
+      ],
+      "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-001",
+      "title": "Cloud identity can drive the base around the collision monitor",
+      "severity": "critical",
+      "actor": "principal:fleet-tools-role",
+      "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/velocity",
+        "/cmd_vel \u2192 /diff_drive_controller"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0855",
+        "T0880"
+      ],
+      "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-001",
+      "title": "Cloud identity can drive the base around the collision monitor",
+      "severity": "critical",
+      "actor": "principal:ops-console-role",
+      "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/velocity",
+        "/cmd_vel \u2192 /diff_drive_controller"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0855",
+        "T0880"
+      ],
+      "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-001",
+      "title": "Cloud identity can drive the base around the collision monitor",
+      "severity": "critical",
+      "actor": "principal:vendor-support",
+      "detail": "/cmd_vel reaches the base controller without passing /collision_monitor (2.00 m/s).",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/velocity",
+        "/cmd_vel \u2192 /diff_drive_controller"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0855",
+        "T0880"
+      ],
+      "fix": "Remove raw velocity from the edge bridge, or point it at the collision monitor's input topic. Deny iot:Publish on fleet/*/cmd/velocity for every role that does not need teleoperation.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-005",
+      "title": "Cloud identity can run code on the robots",
+      "severity": "critical",
+      "actor": "principal:release-pipeline-role",
+      "detail": "Can push software to 12 robots.",
+      "evidence": [
+        "greengrass:CreateDeployment on kx1-fleet"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0843",
+        "T1648"
+      ],
+      "fix": "Limit greengrass:CreateDeployment and iot:CreateJob to the release pipeline, require signed components, and gate fleet-wide deployments behind a human approval step.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-005",
+      "title": "Cloud identity can run code on the robots",
+      "severity": "critical",
+      "actor": "principal:vendor-support",
+      "detail": "Can push software to 12 robots.",
+      "evidence": [
+        "iot:CreateJob with a shell job handler on kx1-fleet"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0843",
+        "T1648"
+      ],
+      "fix": "Limit greengrass:CreateDeployment and iot:CreateJob to the release pipeline, require signed components, and gate fleet-wide deployments behind a human approval step.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-006",
+      "title": "AI agent reads untrusted input and can move robots without approval",
+      "severity": "critical",
+      "actor": "agent:dispatch-agent",
+      "detail": "dispatch-agent reads 2 untrusted input(s) and can move 12 robots with no human approval.",
+      "evidence": [
+        "Work-order tickets from the customer portal",
+        "Dock camera snapshots (the model reads text in the scene)"
+      ],
+      "robots": 12,
+      "attack": [
+        "AML.T0051.001",
+        "T0855"
+      ],
+      "fix": "Turn on human approval for motion tools, strip raw-motion tools from the agent, and scope the tool role to goal-level commands on specific robots.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-010",
+      "title": "Worst-case impact exceeds human pain thresholds",
+      "severity": "critical",
+      "actor": "agent:dispatch-agent",
+      "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+      "evidence": [
+        "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+        "Safe speed for this body region: 0.64 m/s"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0880",
+        "T0879"
+      ],
+      "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+      "accepted": null
+    },
+    {
+      "check": "CZL-010",
+      "title": "Worst-case impact exceeds human pain thresholds",
+      "severity": "critical",
+      "actor": "principal:fleet-tools-role",
+      "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+      "evidence": [
+        "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+        "Safe speed for this body region: 0.64 m/s"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0880",
+        "T0879"
+      ],
+      "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+      "accepted": null
+    },
+    {
+      "check": "CZL-010",
+      "title": "Worst-case impact exceeds human pain thresholds",
+      "severity": "critical",
+      "actor": "principal:ops-console-role",
+      "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+      "evidence": [
+        "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+        "Safe speed for this body region: 0.64 m/s"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0880",
+        "T0879"
+      ],
+      "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+      "accepted": null
+    },
+    {
+      "check": "CZL-010",
+      "title": "Worst-case impact exceeds human pain thresholds",
+      "severity": "critical",
+      "actor": "principal:release-pipeline-role",
+      "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+      "evidence": [
+        "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+        "Safe speed for this body region: 0.64 m/s"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0880",
+        "T0879"
+      ],
+      "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+      "accepted": null
+    },
+    {
+      "check": "CZL-010",
+      "title": "Worst-case impact exceeds human pain thresholds",
+      "severity": "critical",
+      "actor": "principal:vendor-support",
+      "detail": "Worst case: arm into the chest at 4.79 m/s transfers 86.9 J against a 1.57 J limit (55x).",
+      "evidence": [
+        "Over the limit: Abdomen, Chest, Hand and fingers, Lower arm and wrist, Thigh and knee, Upper arm and elbow",
+        "Safe speed for this body region: 0.64 m/s"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0880",
+        "T0879"
+      ],
+      "fix": "Cap speed in shared zones at the safe speed Caziel reports, keep a collision monitor on every velocity path, and enforce the cap below ROS (drives or safety PLC).",
+      "accepted": null
+    },
+    {
+      "check": "CZL-002",
+      "title": "Cloud identity can shut down a safety node",
+      "severity": "high",
+      "actor": "principal:fleet-tools-role",
+      "detail": "Can deactivate /collision_monitor on 12 robots.",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/lifecycle"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0813",
+        "T0880"
+      ],
+      "fix": "Do not bridge lifecycle services. Use SROS2 to deny change_state on safety nodes to the bridge enclave.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-002",
+      "title": "Cloud identity can shut down a safety node",
+      "severity": "high",
+      "actor": "principal:ops-console-role",
+      "detail": "Can deactivate /collision_monitor on 12 robots.",
+      "evidence": [
+        "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role) \u2192 iot:Publish fleet/kx1-01/cmd/lifecycle"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0813",
+        "T0880"
+      ],
+      "fix": "Do not bridge lifecycle services. Use SROS2 to deny change_state on safety nodes to the bridge enclave.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-003",
+      "title": "Cloud identity can rewrite safety or speed parameters",
+      "severity": "high",
+      "actor": "agent:dispatch-agent",
+      "detail": "Can rewrite parameters on /collision_monitor, /controller_server, /move_group, /velocity_smoother.",
+      "evidence": [
+        "dispatch-agent.tune_speed \u2192 iot:Publish fleet/kx1-01/cmd/param"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0836"
+      ],
+      "fix": "Bridge an explicit allowlist of tunable parameters, never '*'. Keep safety limits in a read-only parameter file and enforce the hard limit in the motor drives or safety PLC.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-003",
+      "title": "Cloud identity can rewrite safety or speed parameters",
+      "severity": "high",
+      "actor": "principal:fleet-tools-role",
+      "detail": "Can rewrite parameters on /collision_monitor, /controller_server, /move_group, /velocity_smoother.",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/param"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0836"
+      ],
+      "fix": "Bridge an explicit allowlist of tunable parameters, never '*'. Keep safety limits in a read-only parameter file and enforce the hard limit in the motor drives or safety PLC.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-003",
+      "title": "Cloud identity can rewrite safety or speed parameters",
+      "severity": "high",
+      "actor": "principal:ops-console-role",
+      "detail": "Can rewrite parameters on /collision_monitor, /controller_server, /move_group, /velocity_smoother.",
+      "evidence": [
+        "ops-console-role invokes agent dispatch-agent \u2192 dispatch-agent.tune_speed \u2192 iot:Publish fleet/kx1-01/cmd/param"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0836"
+      ],
+      "fix": "Bridge an explicit allowlist of tunable parameters, never '*'. Keep safety limits in a read-only parameter file and enforce the hard limit in the motor drives or safety PLC.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-004",
+      "title": "Cloud identity can send raw arm trajectories",
+      "severity": "high",
+      "actor": "principal:fleet-tools-role",
+      "detail": "Raw trajectories on /arm_controller/follow_joint_trajectory can move the tool tip at up to 4.79 m/s.",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/arm"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0831",
+        "T0855"
+      ],
+      "fix": "Expose only planned motion (MoveGroup) through the bridge, with a low velocity scaling factor, and require human approval for arm motion near people.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-004",
+      "title": "Cloud identity can send raw arm trajectories",
+      "severity": "high",
+      "actor": "principal:ops-console-role",
+      "detail": "Raw trajectories on /arm_controller/follow_joint_trajectory can move the tool tip at up to 4.79 m/s.",
+      "evidence": [
+        "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role) \u2192 iot:Publish fleet/kx1-01/cmd/arm"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0831",
+        "T0855"
+      ],
+      "fix": "Expose only planned motion (MoveGroup) through the bridge, with a low velocity scaling factor, and require human approval for arm motion near people.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-004",
+      "title": "Cloud identity can send raw arm trajectories",
+      "severity": "high",
+      "actor": "principal:vendor-support",
+      "detail": "Raw trajectories on /arm_controller/follow_joint_trajectory can move the tool tip at up to 4.79 m/s.",
+      "evidence": [
+        "iot:Publish fleet/kx1-01/cmd/arm"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0831",
+        "T0855"
+      ],
+      "fix": "Expose only planned motion (MoveGroup) through the bridge, with a low velocity scaling factor, and require human approval for arm motion near people.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-007",
+      "title": "Identity can take over an AI agent or its tools",
+      "severity": "high",
+      "actor": "principal:ops-console-role",
+      "detail": "Inherits reach through an AI agent or its tools.",
+      "evidence": [
+        "ops-console-role invokes agent dispatch-agent",
+        "ops-console-role rewrites Lambda fleet-navigate (runs as fleet-tools-role)",
+        "ops-console-role rewrites Lambda fleet-nudge (runs as fleet-tools-role)",
+        "ops-console-role rewrites Lambda fleet-pick (runs as fleet-tools-role)",
+        "ops-console-role rewrites Lambda fleet-tune (runs as fleet-tools-role)"
+      ],
+      "robots": 12,
+      "attack": [
+        "T1648",
+        "T1078.004"
+      ],
+      "fix": "Remove lambda:UpdateFunctionCode from operator roles, scope tool roles to exact topics, and use Lambda code signing on agent tools.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-009",
+      "title": "Robot network accepts unauthenticated ROS commands",
+      "severity": "high",
+      "actor": "network:kx1",
+      "detail": "KX-1 mobile manipulator: SROS2 off and rosbridge open on 0.0.0.0:9090.",
+      "evidence": [
+        "ROS_SECURITY_ENABLE=false, domain 7",
+        "rosbridge auth: none"
+      ],
+      "robots": 12,
+      "attack": [
+        "T0855",
+        "T0886"
+      ],
+      "fix": "Enable SROS2 with Enforce strategy and per-enclave permissions, and bind rosbridge to localhost or put it behind authentication.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-008",
+      "title": "One identity can move most of the fleet",
+      "severity": "medium",
+      "actor": "agent:dispatch-agent",
+      "detail": "Can move 12 of 12 robots.",
+      "evidence": [],
+      "robots": 12,
+      "attack": [
+        "T1078.004"
+      ],
+      "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-008",
+      "title": "One identity can move most of the fleet",
+      "severity": "medium",
+      "actor": "principal:fleet-tools-role",
+      "detail": "Can move 12 of 12 robots.",
+      "evidence": [],
+      "robots": 12,
+      "attack": [
+        "T1078.004"
+      ],
+      "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-008",
+      "title": "One identity can move most of the fleet",
+      "severity": "medium",
+      "actor": "principal:ops-console-role",
+      "detail": "Can move 12 of 12 robots.",
+      "evidence": [],
+      "robots": 12,
+      "attack": [
+        "T1078.004"
+      ],
+      "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-008",
+      "title": "One identity can move most of the fleet",
+      "severity": "medium",
+      "actor": "principal:release-pipeline-role",
+      "detail": "Can move 12 of 12 robots.",
+      "evidence": [],
+      "robots": 12,
+      "attack": [
+        "T1078.004"
+      ],
+      "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+      "accepted": null
+    },
+    {
+      "check": "CZL-008",
+      "title": "One identity can move most of the fleet",
+      "severity": "medium",
+      "actor": "principal:vendor-support",
+      "detail": "Can move 12 of 12 robots.",
+      "evidence": [],
+      "robots": 12,
+      "attack": [
+        "T1078.004"
+      ],
+      "fix": "Scope iot:Publish to the robots a workload actually serves, for example by site or thing group, using IoT policy variables or per-site roles.",
+      "accepted": null
+    }
+  ],
+  "checks": {
+    "CZL-001": {
+      "title": "Cloud identity can drive the base around the collision monitor",
+      "severity": "critical",
+      "attack": [
+        "T0855",
+        "T0880"
+      ]
+    },
+    "CZL-002": {
+      "title": "Cloud identity can shut down a safety node",
+      "severity": "high",
+      "attack": [
+        "T0813",
+        "T0880"
+      ]
+    },
+    "CZL-003": {
+      "title": "Cloud identity can rewrite safety or speed parameters",
+      "severity": "high",
+      "attack": [
+        "T0836"
+      ]
+    },
+    "CZL-004": {
+      "title": "Cloud identity can send raw arm trajectories",
+      "severity": "high",
+      "attack": [
+        "T0831",
+        "T0855"
+      ]
+    },
+    "CZL-005": {
+      "title": "Cloud identity can run code on the robots",
+      "severity": "critical",
+      "attack": [
+        "T0843",
+        "T1648"
+      ]
+    },
+    "CZL-006": {
+      "title": "AI agent reads untrusted input and can move robots without approval",
+      "severity": "high",
+      "attack": [
+        "AML.T0051.001",
+        "T0855"
+      ]
+    },
+    "CZL-007": {
+      "title": "Identity can take over an AI agent or its tools",
+      "severity": "high",
+      "attack": [
+        "T1648",
+        "T1078.004"
+      ]
+    },
+    "CZL-008": {
+      "title": "One identity can move most of the fleet",
+      "severity": "medium",
+      "attack": [
+        "T1078.004"
+      ]
+    },
+    "CZL-009": {
+      "title": "Robot network accepts unauthenticated ROS commands",
+      "severity": "high",
+      "attack": [
+        "T0855",
+        "T0886"
+      ]
+    },
+    "CZL-010": {
+      "title": "Worst-case impact exceeds human pain thresholds",
+      "severity": "high",
+      "attack": [
+        "T0880",
+        "T0879"
+      ]
+    }
+  }
+}

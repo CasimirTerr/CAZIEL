@@ -1,0 +1,12 @@
+{
+  "name": "caziel-web-checks",
+  "private": true,
+  "description": "Browser checks for docs/index.html: the site must show exactly the numbers the Python engine produced.",
+  "scripts": {
+    "test": "node tests/web/check_web.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0",
+    "three": "^0.170.0"
+  }
+}

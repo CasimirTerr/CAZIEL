@@ -1,0 +1,397 @@
+{
+  "captured_from": "kx1-04",
+  "captured_at": "2026-10-29T21:14:07Z",
+  "ros_distro": "jazzy",
+  "environment": {
+    "ROS_DOMAIN_ID": "7",
+    "ROS_SECURITY_ENABLE": "true",
+    "ROS_SECURITY_STRATEGY": "Enforce",
+    "RMW_IMPLEMENTATION": "rmw_cyclonedds_cpp"
+  },
+  "nodes": [
+    {
+      "name": "/bt_navigator",
+      "publishers": [
+        {
+          "name": "/plan",
+          "type": "nav_msgs/msg/Path"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/odom",
+          "type": "nav_msgs/msg/Odometry"
+        }
+      ],
+      "services": [
+        {
+          "name": "/bt_navigator/change_state",
+          "type": "lifecycle_msgs/srv/ChangeState"
+        },
+        {
+          "name": "/bt_navigator/get_state",
+          "type": "lifecycle_msgs/srv/GetState"
+        },
+        {
+          "name": "/bt_navigator/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": [
+        {
+          "name": "/navigate_to_pose",
+          "type": "nav2_msgs/action/NavigateToPose"
+        },
+        {
+          "name": "/navigate_through_poses",
+          "type": "nav2_msgs/action/NavigateThroughPoses"
+        }
+      ]
+    },
+    {
+      "name": "/planner_server",
+      "publishers": [
+        {
+          "name": "/plan",
+          "type": "nav_msgs/msg/Path"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/map",
+          "type": "nav_msgs/msg/OccupancyGrid"
+        }
+      ],
+      "services": [
+        {
+          "name": "/planner_server/change_state",
+          "type": "lifecycle_msgs/srv/ChangeState"
+        },
+        {
+          "name": "/planner_server/get_state",
+          "type": "lifecycle_msgs/srv/GetState"
+        },
+        {
+          "name": "/planner_server/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": [
+        {
+          "name": "/compute_path_to_pose",
+          "type": "nav2_msgs/action/ComputePathToPose"
+        }
+      ]
+    },
+    {
+      "name": "/controller_server",
+      "publishers": [
+        {
+          "name": "/cmd_vel_nav",
+          "type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/odom",
+          "type": "nav_msgs/msg/Odometry"
+        },
+        {
+          "name": "/scan",
+          "type": "sensor_msgs/msg/LaserScan"
+        }
+      ],
+      "services": [
+        {
+          "name": "/controller_server/change_state",
+          "type": "lifecycle_msgs/srv/ChangeState"
+        },
+        {
+          "name": "/controller_server/get_state",
+          "type": "lifecycle_msgs/srv/GetState"
+        },
+        {
+          "name": "/controller_server/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": [
+        {
+          "name": "/follow_path",
+          "type": "nav2_msgs/action/FollowPath"
+        }
+      ]
+    },
+    {
+      "name": "/velocity_smoother",
+      "publishers": [
+        {
+          "name": "/cmd_vel_smoothed",
+          "type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/cmd_vel_nav",
+          "type": "geometry_msgs/msg/Twist"
+        },
+        {
+          "name": "/odom",
+          "type": "nav_msgs/msg/Odometry"
+        }
+      ],
+      "services": [
+        {
+          "name": "/velocity_smoother/change_state",
+          "type": "lifecycle_msgs/srv/ChangeState"
+        },
+        {
+          "name": "/velocity_smoother/get_state",
+          "type": "lifecycle_msgs/srv/GetState"
+        },
+        {
+          "name": "/velocity_smoother/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": []
+    },
+    {
+      "name": "/collision_monitor",
+      "publishers": [
+        {
+          "name": "/cmd_vel",
+          "type": "geometry_msgs/msg/Twist"
+        },
+        {
+          "name": "/collision_monitor_state",
+          "type": "nav2_msgs/msg/CollisionMonitorState"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/cmd_vel_smoothed",
+          "type": "geometry_msgs/msg/Twist"
+        },
+        {
+          "name": "/scan",
+          "type": "sensor_msgs/msg/LaserScan"
+        }
+      ],
+      "services": [
+        {
+          "name": "/collision_monitor/change_state",
+          "type": "lifecycle_msgs/srv/ChangeState"
+        },
+        {
+          "name": "/collision_monitor/get_state",
+          "type": "lifecycle_msgs/srv/GetState"
+        },
+        {
+          "name": "/collision_monitor/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": []
+    },
+    {
+      "name": "/docking_server",
+      "publishers": [
+        {
+          "name": "/cmd_vel_nav",
+          "type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/dock_camera/detections",
+          "type": "vision_msgs/msg/Detection3DArray"
+        }
+      ],
+      "services": [
+        {
+          "name": "/docking_server/change_state",
+          "type": "lifecycle_msgs/srv/ChangeState"
+        },
+        {
+          "name": "/docking_server/get_state",
+          "type": "lifecycle_msgs/srv/GetState"
+        },
+        {
+          "name": "/docking_server/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": [
+        {
+          "name": "/dock_robot",
+          "type": "opennav_docking_msgs/action/DockRobot"
+        }
+      ]
+    },
+    {
+      "name": "/diff_drive_controller",
+      "publishers": [
+        {
+          "name": "/odom",
+          "type": "nav_msgs/msg/Odometry"
+        },
+        {
+          "name": "/tf",
+          "type": "tf2_msgs/msg/TFMessage"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/cmd_vel",
+          "type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "services": [],
+      "action_servers": []
+    },
+    {
+      "name": "/controller_manager",
+      "publishers": [],
+      "subscribers": [],
+      "services": [
+        {
+          "name": "/controller_manager/switch_controller",
+          "type": "controller_manager_msgs/srv/SwitchController"
+        },
+        {
+          "name": "/controller_manager/list_controllers",
+          "type": "controller_manager_msgs/srv/ListControllers"
+        }
+      ],
+      "action_servers": []
+    },
+    {
+      "name": "/arm_controller",
+      "publishers": [
+        {
+          "name": "/arm_controller/controller_state",
+          "type": "control_msgs/msg/JointTrajectoryControllerState"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/arm_controller/joint_trajectory",
+          "type": "trajectory_msgs/msg/JointTrajectory"
+        }
+      ],
+      "services": [],
+      "action_servers": [
+        {
+          "name": "/arm_controller/follow_joint_trajectory",
+          "type": "control_msgs/action/FollowJointTrajectory"
+        }
+      ]
+    },
+    {
+      "name": "/gripper_controller",
+      "publishers": [],
+      "subscribers": [],
+      "services": [],
+      "action_servers": [
+        {
+          "name": "/gripper_controller/gripper_cmd",
+          "type": "control_msgs/action/GripperCommand"
+        }
+      ]
+    },
+    {
+      "name": "/move_group",
+      "publishers": [
+        {
+          "name": "/monitored_planning_scene",
+          "type": "moveit_msgs/msg/PlanningScene"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/joint_states",
+          "type": "sensor_msgs/msg/JointState"
+        }
+      ],
+      "services": [
+        {
+          "name": "/move_group/set_parameters",
+          "type": "rcl_interfaces/srv/SetParameters"
+        }
+      ],
+      "action_servers": [
+        {
+          "name": "/move_action",
+          "type": "moveit_msgs/action/MoveGroup"
+        },
+        {
+          "name": "/execute_trajectory",
+          "type": "moveit_msgs/action/ExecuteTrajectory"
+        }
+      ]
+    },
+    {
+      "name": "/lidar_driver",
+      "publishers": [
+        {
+          "name": "/scan",
+          "type": "sensor_msgs/msg/LaserScan"
+        }
+      ],
+      "subscribers": [],
+      "services": [],
+      "action_servers": []
+    },
+    {
+      "name": "/dock_camera",
+      "publishers": [
+        {
+          "name": "/dock_camera/image_raw",
+          "type": "sensor_msgs/msg/Image"
+        },
+        {
+          "name": "/dock_camera/detections",
+          "type": "vision_msgs/msg/Detection3DArray"
+        }
+      ],
+      "subscribers": [],
+      "services": [],
+      "action_servers": []
+    },
+    {
+      "name": "/kx1_edge_bridge",
+      "publishers": [
+        {
+          "name": "/cmd_vel",
+          "type": "geometry_msgs/msg/Twist"
+        }
+      ],
+      "subscribers": [
+        {
+          "name": "/odom",
+          "type": "nav_msgs/msg/Odometry"
+        },
+        {
+          "name": "/collision_monitor_state",
+          "type": "nav2_msgs/msg/CollisionMonitorState"
+        }
+      ],
+      "services": [],
+      "action_servers": []
+    },
+    {
+      "name": "/rosbridge_websocket",
+      "publishers": [],
+      "subscribers": [],
+      "services": [
+        {
+          "name": "/rosapi/topics",
+          "type": "rosapi_msgs/srv/Topics"
+        }
+      ],
+      "action_servers": []
+    }
+  ],
+  "projected_by": "caziel fix (expected state once SROS2 is deployed; re-capture to confirm)"
+}

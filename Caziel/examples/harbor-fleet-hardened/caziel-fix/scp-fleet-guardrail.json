@@ -1,0 +1,30 @@
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "NoRawRobotControl",
+      "Effect": "Deny",
+      "Action": "iot:Publish",
+      "Resource": [
+        "arn:aws:iot:us-west-2:111122223333:topic/fleet/*/cmd/arm",
+        "arn:aws:iot:us-west-2:111122223333:topic/fleet/*/cmd/param"
+      ]
+    },
+    {
+      "Sid": "OnlyReleaseDeploysRobotCode",
+      "Effect": "Deny",
+      "Action": [
+        "greengrass:CreateDeployment",
+        "iot:CreateJob"
+      ],
+      "Resource": "*",
+      "Condition": {
+        "ArnNotLike": {
+          "aws:PrincipalArn": [
+            "arn:aws:iam::111122223333:role/release-pipeline-role"
+          ]
+        }
+      }
+    }
+  ]
+}

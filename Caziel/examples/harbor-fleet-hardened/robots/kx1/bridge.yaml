@@ -1,0 +1,23 @@
+# Hardened by caziel fix. See caziel-fix/CHANGES.md.
+name: kx1-edge-bridge
+runtime: greengrass-component
+mappings:
+- mqtt: fleet/{thing}/cmd/navigate
+  ros: {kind: action, name: /navigate_to_pose, type: nav2_msgs/action/NavigateToPose}
+- mqtt: fleet/{thing}/cmd/dock
+  ros: {kind: action, name: /dock_robot, type: opennav_docking_msgs/action/DockRobot}
+- mqtt: fleet/{thing}/cmd/velocity
+  note: Added during the pilot so operators could nudge a stuck robot off a pallet
+    edge.
+  ros: {kind: topic, name: /cmd_vel_smoothed, type: geometry_msgs/msg/Twist}
+  requires_approval: true
+- mqtt: fleet/{thing}/cmd/pick
+  ros: {kind: action, name: /move_action, type: moveit_msgs/action/MoveGroup}
+  requires_approval: true
+- mqtt: fleet/{thing}/cmd/lifecycle
+  note: Lets the fleet console restart a hung Nav2 node.
+  ros:
+    kind: lifecycle
+    nodes: [/bt_navigator, /controller_server, /docking_server, /planner_server, /velocity_smoother]
+ros_security: {enabled: true, strategy: Enforce, enclave: /caziel/kx1_bridge}
+lan: {endpoint: '127.0.0.1:9090', auth: token}

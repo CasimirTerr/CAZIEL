@@ -1,0 +1,37 @@
+# kx1-edge-bridge: Greengrass v2 component that maps AWS IoT Core MQTT to ROS 2.
+# One instance runs on every KX-1. {thing} is the robot's IoT thing name.
+name: kx1-edge-bridge
+runtime: greengrass-component
+
+mappings:
+  - mqtt: fleet/{thing}/cmd/navigate
+    ros: {kind: action, name: /navigate_to_pose, type: nav2_msgs/action/NavigateToPose}
+
+  - mqtt: fleet/{thing}/cmd/dock
+    ros: {kind: action, name: /dock_robot, type: opennav_docking_msgs/action/DockRobot}
+
+  - mqtt: fleet/{thing}/cmd/velocity
+    note: Added during the pilot so operators could nudge a stuck robot off a pallet edge.
+    ros: {kind: topic, name: /cmd_vel, type: geometry_msgs/msg/Twist}
+
+  - mqtt: fleet/{thing}/cmd/pick
+    ros: {kind: action, name: /move_action, type: moveit_msgs/action/MoveGroup}
+
+  - mqtt: fleet/{thing}/cmd/arm
+    note: Replays taught trajectories for the tote-transfer motion.
+    ros: {kind: action, name: /arm_controller/follow_joint_trajectory, type: control_msgs/action/FollowJointTrajectory}
+
+  - mqtt: fleet/{thing}/cmd/param
+    note: Remote tuning. Accepts {node, name, value}.
+    ros: {kind: parameters, nodes: ["*"]}
+
+  - mqtt: fleet/{thing}/cmd/lifecycle
+    note: Lets the fleet console restart a hung Nav2 node.
+    ros: {kind: lifecycle, nodes: ["*"]}
+
+ros_security:
+  enabled: false
+
+lan:
+  endpoint: 0.0.0.0:9090     # rosbridge websocket for the on-site maintenance tablet
+  auth: none

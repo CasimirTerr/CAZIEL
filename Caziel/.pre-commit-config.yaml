@@ -1,0 +1,14 @@
+repos:
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.6.9
+    hooks:
+      - id: ruff
+      - id: ruff-format
+  - repo: local
+    hooks:
+      - id: generated-files
+        name: generated files match the code
+        entry: bash -c "python scripts/gen_checks_doc.py --check && python scripts/gen_traffic.py --check && python scripts/build_site_data.py --check"
+        language: system
+        pass_filenames: false
+        files: ^(caziel/|examples/harbor-fleet/|scripts/)

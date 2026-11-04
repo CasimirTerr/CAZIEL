@@ -1,0 +1,17 @@
+# Caziel robot description for the KX-1 mobile manipulator.
+model: KX-1 mobile manipulator
+urdf: robot.urdf
+params: params.yaml
+graph: graph.json     # captured on a running robot with `caziel snapshot`
+bridge: bridge.yaml
+payload_kg: 4.0       # heaviest tote the gripper is rated for
+
+base:
+  controller: /diff_drive_controller
+  # Motor and gearbox ceiling, used when the controller has no velocity limit set.
+  hardware_max_speed_mps: 2.2
+
+arm:
+  urdf_root: arm_mount
+  urdf_tip: gripper_tcp
+  controller: /arm_controller

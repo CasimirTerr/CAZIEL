@@ -1,0 +1,23 @@
+# Hardened by caziel fix. See caziel-fix/CHANGES.md.
+name: Harbor Logistics - Tempe DC
+account_id: '111122223333'
+region: us-west-2
+robots:
+- model: kx1
+  thing_group: kx1-fleet
+  things: {prefix: kx1-, count: 12}
+iot:
+  jobs: {enabled: true, handler: signed-documents}
+  greengrass: {enabled: true}
+site:
+  people_present: true
+  body_regions: [hand, forearm, upper_arm, chest, abdomen, thigh]
+identities: cloud/iam.json
+agents: cloud/agents.yaml
+accepted_risks:
+- actor: principal:release-pipeline-role
+  checks: [CZL-005, CZL-008, CZL-010]
+  reason: Release pipeline has to deploy robot software. Accepted on the condition
+    that components are signed and the OIDC trust is limited to the protected main
+    branch.
+  review_by: set a date
